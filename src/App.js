@@ -13,15 +13,14 @@ function App(){
   useEffect(()=>{
     // getReportByCity()
     // .then(data=>console.log(data))
-    
-  },[])
+    // console.log(report)
+  },[report])
 
  function addReport(newReport) {
     setReports([...reports, newReport]);
   }
 
   function deleteReport(id) {
-    console.log(id)
     const filteredReport = reports.filter(Report => Report.id !== id);
     setReports(filteredReport)
   }
@@ -30,7 +29,7 @@ function App(){
   <main className='App'>
       <h1>Powder Report</h1>
       <Form addReport={addReport} setReport={setReport} setLocation={setLocation}/>
-      <Report location={location} report={report}/>
+      {report && <Report location={location} report={report}/>}
       <Reports reports={reports} deleteReport={deleteReport}/>
     </main>
   )
