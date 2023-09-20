@@ -1,16 +1,14 @@
-
+import sampleData from './sampleData.json'
 import Form from './Form';
 import  { useState, useEffect } from 'react';
-import Ideas from './Ideas';
+import Reports from './Reports';
+import Report from './Report';
 import './App.css';
 
 function App(){
-  const dummyIdeas = [
-    { id: 1, title: 'Prank Travis', description: 'Stick googly eyes on all his stuff' },
-    { id: 2, title: 'Make a secret password app', description: 'So you and your rideshare driver can both know neither one of you is lying' },
-    { id: 3, title: 'Learn a martial art', description: 'To exact vengeance upon my enemies' },
-  ]
-  const [ideas, setIdeas] = useState(dummyIdeas)
+  const [location, setLocation] = useState('breckenridge');
+  const [report, setReport] = useState({});
+  const [reports, setReports] = useState([])
   
   useEffect(()=>{
     // getReportByCity()
@@ -18,21 +16,22 @@ function App(){
     
   },[])
 
- function addIdea(newIdea) {
-    setIdeas([...ideas, newIdea]);
+ function addReport(newReport) {
+    setReports([...reports, newReport]);
   }
 
-  function deleteIdea(id) {
+  function deleteReport(id) {
     console.log(id)
-    const filteredIdea = ideas.filter(idea => idea.id !== id);
-    setIdeas(filteredIdea)
+    const filteredReport = reports.filter(Report => Report.id !== id);
+    setReports(filteredReport)
   }
 
   return(
   <main className='App'>
-      <h1>IdeaBox</h1>
-      <Form addIdea={addIdea}/>
-      <Ideas ideas={ideas} deleteIdea={deleteIdea}/>
+      <h1>Powder Report</h1>
+      <Form addReport={addReport} setReport={setReport} setLocation={setLocation}/>
+      <Report location={location} report={report}/>
+      <Reports reports={reports} deleteReport={deleteReport}/>
     </main>
   )
 }

@@ -1,43 +1,37 @@
 import { useState } from 'react';
 import './Form.css';
+import sampleData from './sampleData.json'
 
-export default function Form({addIdea}){
-  const [title, setTitle] = useState("");
-  const [description, setDescription] = useState("");
+export default function Form({addReport, location, report, setLocation, setReport}){
 
-function submitIdeas(event) {
+
+function submitLocations(event){
+  event.preventDefault()
+  setReport(sampleData)
+  
+}
+
+function submitReports(event) {
         event.preventDefault()
-        const newIdea = {
-            id: Date.now(),
-            title,
-            description
-        }
-        addIdea(newIdea)
+        const newReport = report
+        addReport(newReport)
         clearInput()
   }
   function clearInput(){
-        setTitle("")
-        setDescription("")
+        setLocation("")
+        setReport({})
   }
 
     return (
         <form>
           <input
             type='text'
-            placeholder='Title'
-            name='title'
-            value={title}
-            onChange={event => setTitle(event.target.value)}
+            placeholder='Location'
+            name='location'
+            value={location}
+            onChange={event => setLocation(event.target.value)}
           />
 
-          <input
-            type='text'
-            placeholder='Description'
-            name='description'
-            value={description}
-            onChange={event => setDescription(event.target.value)}
-          />
-
-          <button onClick = { event => submitIdeas(event)}>SUBMIT</button>
+          <button onClick = { event => submitLocations(event)}>SUBMIT</button>
         </form>
       )}
