@@ -4,10 +4,10 @@ import sampleData from './sampleData.json'
 
 export default function Form({location, report, setLocation, setReport, displayReport}){
   
-  location = 'breckenridge'
+  // location = 'breckenridge'
   function submitLocations(event){
     event.preventDefault()
-    displayReport(location)
+    displayReport()
   }
 
   function clearInput(){

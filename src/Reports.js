@@ -1,15 +1,16 @@
 import './Reports.css';
-import Card from "./ReportCard"
+import ReportCard from "./ReportCard"
 function Reports({ reports, deleteReport }){
 
   const reportCards = reports.map(report => {
     return (
-      <Card
+      <ReportCard
         location={report.location}
-        currentSnowfall={report.currentSnowFall}
+        currentSnowfall={report.currentSnowfall}
+        maxSnow={report.maxSnow}
         id={report.id}
         key={report.id}
-        deletereport={deleteReport}
+        deleteReport={deleteReport}
       />
     )
   })
