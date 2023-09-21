@@ -9,15 +9,24 @@ function App(){
   const [location, setLocation] = useState('breckenridge');
   const [report, setReport] = useState({});
   const [reports, setReports] = useState([])
-  
-  useEffect(()=>{
-    // getReportByCity()
+  const [allWeatherObjects, setAllWeatherObjects] = useState([])
+
+  function displayReport(location){
+    // getReportByCity(location)
     // .then(data=>console.log(data))
     // console.log(report)
-  },[report])
+      console.log('Hello')
+      setReport(sampleData.data)
+      console.log(sampleData.data.weather)
+      setAllWeatherObjects(sampleData.data.weather)
+    }
+    console.log(allWeatherObjects)
 
- function addReport(newReport) {
+ function saveReport(newReport) {
+  console.log(newReport)
+  if(!reports.map(report=>report.location).includes(newReport.location)){
     setReports([...reports, newReport]);
+  }
   }
 
   function deleteReport(id) {
@@ -28,8 +37,9 @@ function App(){
   return(
   <main className='App'>
       <h1>Powder Report</h1>
-      <Form addReport={addReport} setReport={setReport} setLocation={setLocation}/>
-      {report && <Report location={location} report={report}/>}
+      <Form setReport={setReport} setLocation={setLocation} displayReport={displayReport}/>
+      <Report saveReport={saveReport} location={location} report={report} allWeatherObjects={allWeatherObjects}
+      />
       <Reports reports={reports} deleteReport={deleteReport}/>
     </main>
   )
