@@ -6,6 +6,7 @@ import Report from './Report';
 import './App.css';
 import { getReportByCity } from './apiCalls';
 import Error from './Error';
+import { Route, Routes } from 'react-router-dom';
 
 function App(){
   const [location, setLocation] = useState('');
@@ -15,14 +16,14 @@ function App(){
   const [error, setError] = useState('')
 
   function displayReport(){
-    setError('')
-    if(!location){
-      setError('please enter a valid Location.')
-      return 
-    }
-    console.log(` i just fetched ${location}`)
+    // console.log("I am making a fetch call")
+    // setError('')
+    // if(!location){
+    //   setError('please enter a valid Location.')
+    //   return 
+    // }
     // getReportByCity(location)
-    // .then(data=>{ console.log(data)
+    // .then(data=>{
     //   if(data.data.error){
     //     return setError('Unable to find any matching weather location')
     //   } 
@@ -42,7 +43,6 @@ function App(){
   }
 
   function deleteReport(id) {
-    console.log(`i just deleted id# ${id}`)
     const filteredReport = reports.filter(Report => Report.id !== id);
     setReports(filteredReport)
   }
@@ -50,11 +50,13 @@ function App(){
   return(
   <main className='App'>
       <h1>Powder Report</h1>
-      <Form setReport={setReport} setLocation={setLocation} displayReport={displayReport}/>
-      <Error error={error} />
-      <Report saveReport={saveReport} location={location} report={report} allWeatherObjects={allWeatherObjects}
-      />
-      <Reports reports={reports} deleteReport={deleteReport}/>
+      <Routes>
+        <Route path="/" element={<Form setReport={setReport} setLocation={setLocation} displayReport={displayReport}/>}/>
+        <Route path="*" element={<Error error={error} />}/>
+        <Route path="/:location" element={<Report saveReport={saveReport} location={location} report={report} allWeatherObjects={allWeatherObjects}
+          />}/> 
+        <Route path="/savedReports" element={<Reports reports={reports} deleteReport={deleteReport}/>}/>
+      </Routes>
     </main>
   )
 }

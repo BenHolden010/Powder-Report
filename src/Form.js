@@ -1,6 +1,8 @@
 import { useEffect, useState } from 'react';
 import './Form.css';
 import sampleData from './sampleData.json'
+import { Link, NavLink } from 'react-router-dom';
+
 
 export default function Form({location, report, setLocation, setReport, displayReport}){
   
@@ -23,7 +25,8 @@ export default function Form({location, report, setLocation, setReport, displayR
             value={location}
             onChange={event => setLocation(event.target.value)}
           />
-
+         <Link to={`/${location}`}>
           <button onClick = { event => submitLocations(event)}>SUBMIT</button>
+        </Link>
         </form>
       )}
