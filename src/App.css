@@ -16,7 +16,16 @@ border-radius: 1em;
   text-align: center;
 }
 
-.App-logo {
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+.header-button {
+  width: 10em;
+}
+
+/* .App-logo {
   height: 40vmin;
   pointer-events: none;
 }
@@ -49,4 +58,4 @@ border-radius: 1em;
   to {
     transform: rotate(360deg);
   }
-}
+} */

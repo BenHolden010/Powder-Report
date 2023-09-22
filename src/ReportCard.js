@@ -1,4 +1,4 @@
-import './Card.css';
+import './ReportCard.css';
 
 const ReportCard = ({ location, currentSnowfall, maxSnow, id, deleteReport }) => {
     return (

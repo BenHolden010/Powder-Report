@@ -6,33 +6,39 @@ import Report from './Report';
 import './App.css';
 import { getReportByCity } from './apiCalls';
 import Error from './Error';
-import { Route, Routes } from 'react-router-dom';
+import { Route, Routes, Link, useNavigate } from 'react-router-dom';
 
 function App(){
-  const [location, setLocation] = useState('');
+
   const [report, setReport] = useState({});
   const [reports, setReports] = useState([])
   const [allWeatherObjects, setAllWeatherObjects] = useState([])
   const [error, setError] = useState('')
+  const navigate = useNavigate()
 
-  function displayReport(){
-    // console.log("I am making a fetch call")
-    // setError('')
-    // if(!location){
-    //   setError('please enter a valid Location.')
-    //   return 
-    // }
-    // getReportByCity(location)
-    // .then(data=>{
-    //   if(data.data.error){
-    //     return setError('Unable to find any matching weather location')
-    //   } 
-    //   else if(data.data.weather){
-    //     setAllWeatherObjects(data.data.weather)
-    //   }
-    // })
-    // .catch(err=>console.log(err))
-    setAllWeatherObjects(sampleData.data.weather)
+  function displayReport(location){
+    console.log("I am making a fetch call to " + location)
+    setError('')
+    if(!location){
+      navigate('/error')
+      setError('please enter a valid Location.')
+      return 
+    }
+    getReportByCity(location)
+    .then(data=>{
+      if(data.data.error){
+        setError('Unable to find any matching weather location, please return home and try again.')
+        navigate('/error')
+        return 
+      } 
+      else if(data.data.weather){
+        setAllWeatherObjects(data.data.weather)
+      } else {
+        setError('The server is down, please try again tomorrow.')
+      }
+    })
+    .catch(err=>console.log(err))
+    // setAllWeatherObjects(sampleData.data.weather)
     }
 
 
@@ -49,11 +55,15 @@ function App(){
 
   return(
   <main className='App'>
+      <div className='header'>
+      <Link to='/'><button className='header-button'>Home</button></Link>
       <h1>Powder Report</h1>
+      <Link to='/savedReports'><button className='header-button'>Saved Reports</button></Link>
+      </div>
       <Routes>
-        <Route path="/" element={<Form setReport={setReport} setLocation={setLocation} displayReport={displayReport}/>}/>
-        <Route path="*" element={<Error error={error} />}/>
-        <Route path="/:location" element={<Report saveReport={saveReport} location={location} report={report} allWeatherObjects={allWeatherObjects}
+        <Route path="/" element={<Form setReport={setReport} displayReport={displayReport}/>}/>
+        <Route path='/error' element={<Error error={error} />}/>
+        <Route path="/:location" element={<Report saveReport={saveReport} report={report} allWeatherObjects={allWeatherObjects}
           />}/> 
         <Route path="/savedReports" element={<Reports reports={reports} deleteReport={deleteReport}/>}/>
       </Routes>
