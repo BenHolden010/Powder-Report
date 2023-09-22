@@ -41,7 +41,6 @@ const days = allWeatherObjects.map(day=>{
 export default Report;
 
 Report.propTypes = {
-  testProp: PropTypes.string.isRequired,
   allWeatherObjects: PropTypes.array.isRequired,
   saveReport: PropTypes.func.isRequired
 }

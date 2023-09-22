@@ -26,6 +26,5 @@ function Form({displayReport}){
       export default Form
 
       Form.propTypes = {
-        testProp: PropTypes.string.isRequired,
         displayReport: PropTypes.func.isRequired
       }

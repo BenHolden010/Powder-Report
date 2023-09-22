@@ -1,12 +1,11 @@
 import PropTypes from 'prop-types';
 
 export default function Error({error}){
-  return <p>
-    {error}
-  </p>
+  return <div className="error">
+    <p>{error}</p>
+  </div>
 }
 
 Error.propTypes = {
-  testProp: PropTypes.string.isRequired,
   error: PropTypes.string.isRequired
 }

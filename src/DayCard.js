@@ -22,10 +22,9 @@ const DayCard = ({date, chanceofsnow, maxTempF, minTempF, hours}) => {
   export default DayCard;
 
   DayCard.propTypes = {
-    testProp: PropTypes.string.isRequired,
     date: PropTypes.string.isRequired,
-    chanceofsnow: PropTypes.number.isRequired, 
-    maxTempF: PropTypes.number.isRequired, 
-    minTempF: PropTypes.number.isRequired, 
+    chanceofsnow: PropTypes.string.isRequired, 
+    maxTempF: PropTypes.array.isRequired, 
+    minTempF: PropTypes.array.isRequired, 
     hours: PropTypes.array.isRequired
   }

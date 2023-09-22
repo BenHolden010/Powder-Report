@@ -22,6 +22,5 @@ export default function HourCard({hour}){
 }
 
 HourCard.propTypes = {
-  testProp: PropTypes.string.isRequired,
   hour: PropTypes.object.isRequired
 }

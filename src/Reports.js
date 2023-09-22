@@ -26,7 +26,6 @@ function Reports({ reports, deleteReport }){
 export default Reports;
 
 Reports.propTypes = {
-  testProp: PropTypes.string.isRequired,
   reports: PropTypes.array.isRequired,
   deleteReport: PropTypes.func.isRequired
 }
