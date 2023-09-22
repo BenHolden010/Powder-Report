@@ -1,14 +1,17 @@
 import { useEffect, useState } from 'react';
 import './Form.css';
 import sampleData from './sampleData.json'
+import { Link, NavLink } from 'react-router-dom';
 
-export default function Form({location, report, setLocation, setReport, displayReport}){
-  
+
+export default function Form({displayReport}){
+  const [location, setLocation] = useState('');
   // location = 'breckenridge'
-  function submitLocations(event){
-    event.preventDefault()
-    displayReport()
-  }
+  // function submitLocations(event){
+    // event.preventDefault()
+  //   console.log(location)
+  //   displayReport(location)
+  // }
 
   function clearInput(){
         setLocation("")
@@ -23,7 +26,8 @@ export default function Form({location, report, setLocation, setReport, displayR
             value={location}
             onChange={event => setLocation(event.target.value)}
           />
-
-          <button onClick = { event => submitLocations(event)}>SUBMIT</button>
+         <NavLink to={`/${location}`}>
+          <button onClick = { () => displayReport(location)}>SUBMIT</button>
+        </NavLink>
         </form>
       )}

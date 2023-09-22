@@ -1,8 +1,10 @@
 
+import { useParams } from "react-router-dom"
 import DayCard from "./DayCard"
 import './Report.css'
 
-function Report({location, allWeatherObjects, saveReport}){
+function Report({ allWeatherObjects, saveReport}){
+let location = useParams().location
 let allSnow = allWeatherObjects.map(obj=>obj.chanceofsnow)
 let reportTemplate = {
   id: Date.now(),
