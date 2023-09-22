@@ -2,6 +2,7 @@
 import { useParams } from "react-router-dom"
 import DayCard from "./DayCard"
 import './Report.css'
+import PropTypes from 'prop-types';
 
 function Report({ allWeatherObjects, saveReport}){
 let location = useParams().location
@@ -16,11 +17,11 @@ let reportTemplate = {
 const days = allWeatherObjects.map(day=>{
   return <DayCard
   date={day.date}
-  key={day.date}
   chanceofsnow={day.chanceofsnow} 
   maxTempF={day.bottom.map(time=>time.maxtempF)}
   minTempF={day.bottom.map(time=>time.mintempF)}
   hours={day.hourly}
+  key={day.date}
   />
 })
 
@@ -37,4 +38,10 @@ const days = allWeatherObjects.map(day=>{
 )
 }
 
-export default Report
+export default Report;
+
+Report.propTypes = {
+  testProp: PropTypes.string.isRequired,
+  allWeatherObjects: PropTypes.array.isRequired,
+  saveReport: PropTypes.func.isRequired
+}

@@ -11,3 +11,12 @@ const ReportCard = ({ location, currentSnowfall, maxSnow, id, deleteReport }) =>
     )
   }
   export default ReportCard;
+
+  ReportCard.propTypes = {
+    testProp: PropTypes.string.isRequired,
+    location: PropTypes.string.isRequired,
+    currentSnowfall: PropTypes.number.isRequired, 
+    maxSnow: PropTypes.number.isRequired, 
+    id: PropTypes.number.isRequired,
+    deleteReport: PropTypes.func.isRequired
+  }

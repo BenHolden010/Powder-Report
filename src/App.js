@@ -9,8 +9,6 @@ import Error from './Error';
 import { Route, Routes, Link, useNavigate } from 'react-router-dom';
 
 function App(){
-
-  const [report, setReport] = useState({});
   const [reports, setReports] = useState([])
   const [allWeatherObjects, setAllWeatherObjects] = useState([])
   const [error, setError] = useState('')
@@ -61,10 +59,10 @@ function App(){
       <Link to='/savedReports'><button className='header-button'>Saved Reports</button></Link>
       </div>
       <Routes>
-        <Route path="/" element={<Form setReport={setReport} displayReport={displayReport}/>}/>
+        <Route path="/" element={<Form displayReport={displayReport}/>}/>
         <Route path='/error' element={<Error error={error} />}/>
-        <Route path="/:location" element={<Report saveReport={saveReport} report={report} allWeatherObjects={allWeatherObjects}
-          />}/> 
+        <Route path="/location/:location" element={<Report saveReport={saveReport}
+          allWeatherObjects={allWeatherObjects}/>}/> 
         <Route path="/savedReports" element={<Reports reports={reports} deleteReport={deleteReport}/>}/>
       </Routes>
     </main>

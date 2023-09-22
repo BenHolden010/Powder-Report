@@ -1,4 +1,5 @@
 import './HourCard.css'
+import PropTypes from 'prop-types';
 
 export default function HourCard({hour}){
   let stringTime
@@ -18,4 +19,9 @@ export default function HourCard({hour}){
       <p>snow fall: {hour.snowfall_cm}cm</p>
     </div>
   )
+}
+
+HourCard.propTypes = {
+  testProp: PropTypes.string.isRequired,
+  hour: PropTypes.object.isRequired
 }
