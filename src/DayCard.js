@@ -1,5 +1,6 @@
 import './DayCard.css';
 import HourCard from './HourCard';
+import PropTypes from 'prop-types';
 
 const DayCard = ({date, chanceofsnow, maxTempF, minTempF, hours}) => {
   const weatherPerHour = hours.map(hour=>{
@@ -19,3 +20,11 @@ const DayCard = ({date, chanceofsnow, maxTempF, minTempF, hours}) => {
     )
   }
   export default DayCard;
+
+  DayCard.propTypes = {
+    date: PropTypes.string.isRequired,
+    chanceofsnow: PropTypes.string.isRequired, 
+    maxTempF: PropTypes.array.isRequired, 
+    minTempF: PropTypes.array.isRequired, 
+    hours: PropTypes.array.isRequired
+  }

@@ -1,4 +1,5 @@
 import './ReportCard.css';
+import PropTypes from 'prop-types';
 
 const ReportCard = ({ location, currentSnowfall, maxSnow, id, deleteReport }) => {
     return (
@@ -11,3 +12,11 @@ const ReportCard = ({ location, currentSnowfall, maxSnow, id, deleteReport }) =>
     )
   }
   export default ReportCard;
+
+  ReportCard.propTypes = {
+    location: PropTypes.string.isRequired,
+    currentSnowfall: PropTypes.string.isRequired, 
+    maxSnow: PropTypes.number.isRequired, 
+    id: PropTypes.number.isRequired,
+    deleteReport: PropTypes.func.isRequired
+  }

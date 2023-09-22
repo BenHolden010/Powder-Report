@@ -4,6 +4,18 @@ describe('Powder Report', () => {
       statusCode: 201,
       fixture: 'report'
     }).as('report')
+    .intercept('GET','https://api.worldweatheronline.com/premium/v1/ski.ashx?key=b5a5dbe0295146dfa83163732231809&q=sdfsdfsdf&format=json',{
+      statusCode: 201,
+      body: {
+          "data": {
+            "error": [
+              {
+              "msg": "Unable to find any matching weather location to the query submitted!"
+              }
+            ]
+          }
+        }
+    }).as('report2')
     .visit('http://localhost:3000/')
   })
   it('should show home page with a header and form', () => {
@@ -43,4 +55,10 @@ describe('Powder Report', () => {
     .get('.reports-container').children().should('have.length', 0)
     .get('.header').contains('button','Home').click()
   })
+  it('should allow a user to type in a nonsense location and show the error page', () => {
+    cy.get('input[name="location"]').type("sdfsdfsdf").should('have.value','sdfsdfsdf')
+    .get('form').contains('button','SUBMIT').click().wait('@report2')
+    .url().should('contain','/*')
+    .get('.error').contains('p','Unable to find any matching weather location, please return home and try again.')
+})
 })

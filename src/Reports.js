@@ -1,16 +1,18 @@
 import './Reports.css';
 import ReportCard from "./ReportCard"
+import PropTypes from 'prop-types';
+
 function Reports({ reports, deleteReport }){
 
   const reportCards = reports.map(report => {
     return (
       <ReportCard
+        id={report.id}
         location={report.location}
         currentSnowfall={report.currentSnowfall}
         maxSnow={report.maxSnow}
-        id={report.id}
-        key={report.id}
         deleteReport={deleteReport}
+        key={report.id}
       />
     )
   })
@@ -22,3 +24,8 @@ function Reports({ reports, deleteReport }){
   )
 }
 export default Reports;
+
+Reports.propTypes = {
+  reports: PropTypes.array.isRequired,
+  deleteReport: PropTypes.func.isRequired
+}
