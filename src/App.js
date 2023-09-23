@@ -1,4 +1,3 @@
-import sampleData from './sampleData.json'
 import Form from './Form';
 import  { useState, useEffect } from 'react';
 import Reports from './Reports';
@@ -71,4 +70,3 @@ function App(){
 }
 
 export default App;
-
