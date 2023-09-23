@@ -34,7 +34,10 @@ function App(){
         setError('Error: please try again later')
       }
     })
-    .catch(err=>console.log(err))
+    .catch(err=>{
+      console.log(err)
+      navigate('/*')
+    })
     }
 
 
