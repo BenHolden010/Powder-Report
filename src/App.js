@@ -1,4 +1,3 @@
-import sampleData from './sampleData.json'
 import Form from './Form';
 import  { useState, useEffect } from 'react';
 import Reports from './Reports';
@@ -34,7 +33,10 @@ function App(){
         setError('Error: please try again later')
       }
     })
-    .catch(err=>console.log(err))
+    .catch(err=>{
+      console.log(err)
+      navigate('/*')
+    })
     }
 
 
@@ -68,4 +70,3 @@ function App(){
 }
 
 export default App;
-
