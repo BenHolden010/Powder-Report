@@ -3,7 +3,7 @@ import ReportCard from "./ReportCard"
 import PropTypes from 'prop-types';
 
 function Reports({ reports, deleteReport }){
-
+console.log('reports', reports)
   const reportCards = reports.map(report => {
     return (
       <ReportCard
@@ -29,6 +29,12 @@ function Reports({ reports, deleteReport }){
 export default Reports;
 
 Reports.propTypes = {
-  reports: PropTypes.array.isRequired,
+  reports: PropTypes.arrayOf({
+  currentSnowfall: PropTypes.string.isRequired,
+  id: PropTypes.number.isRequired,
+  location: PropTypes.string.isRequired,
+  maxSnow: PropTypes.number.isRequired,
+  key: PropTypes.number.isRequired
+  }).isRequired,
   deleteReport: PropTypes.func.isRequired
 }
