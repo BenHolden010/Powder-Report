@@ -18,9 +18,12 @@ function Reports({ reports, deleteReport }){
   })
 
   return (
-    <div className='reports-container'>
+    <>
+    {!reportCards.length && <h2 className='card'>No reports! Please go Home to add a new Report!</h2>}
+    <div className='reports-container'> 
       {reportCards}
     </div>
+    </>
   )
 }
 export default Reports;
