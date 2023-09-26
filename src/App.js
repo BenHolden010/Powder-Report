@@ -11,9 +11,11 @@ function App(){
   const [reports, setReports] = useState([])
   const [allWeatherObjects, setAllWeatherObjects] = useState([])
   const [error, setError] = useState('Error: please try again later')
+  const [savedNotification, setSavedNotification] = useState('')
   const navigate = useNavigate()
 
   function displayReport(location){
+    setSavedNotification('')
     if(!location){
       setError('please return home and enter a Location.')
       navigate('/*')
@@ -43,6 +45,9 @@ function App(){
  function saveReport(newReport) {
   if(!reports.map(report=>report.location).includes(newReport.location)){
     setReports([...reports, newReport]);
+    setSavedNotification(`Congrats! You have saved this report!`)
+  } else {
+    setSavedNotification('You have already saved this report!')
   }
   }
 
@@ -62,7 +67,7 @@ function App(){
         <Route path="/" element={<Form displayReport={displayReport}/>}/>
         <Route path='/*' element={<Error error={error} />}/>
         <Route path="/location/:location" element={<Report saveReport={saveReport}
-          allWeatherObjects={allWeatherObjects}/>}/> 
+          allWeatherObjects={allWeatherObjects} savedNotification={savedNotification}/>}/> 
         <Route path="/savedReports" element={<Reports reports={reports} deleteReport={deleteReport}/>}/>
       </Routes>
     </main>

@@ -4,7 +4,7 @@ import DayCard from "./DayCard"
 import './Report.css'
 import PropTypes from 'prop-types';
 
-function Report({ allWeatherObjects, saveReport}){
+function Report({ allWeatherObjects, saveReport, savedNotification}){
 let location = useParams().location
 let allSnow = allWeatherObjects.map(obj=>obj.chanceofsnow)
 let reportTemplate = {
@@ -33,6 +33,7 @@ const days = allWeatherObjects.map(day=>{
     <div className='report-container'>
     {days}
     </div>
+    {savedNotification && <p>{savedNotification}</p>}
     <button onClick={(event) => {saveReport(reportTemplate)}}>Save Report</button>
   </div>
 )
