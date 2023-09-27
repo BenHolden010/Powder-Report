@@ -22,5 +22,15 @@ export default function HourCard({hour}){
 }
 
 HourCard.propTypes = {
-  hour: PropTypes.object.isRequired
+  hour: PropTypes.shape({
+      bottom: PropTypes.arrayOf(
+        PropTypes.shape({
+        weatherIconUrl: PropTypes.arrayOf(
+          PropTypes.shape({
+          value: PropTypes.string.isRequired
+        }))
+      })),
+      snowfall_cm: PropTypes.string.isRequired,
+      time: PropTypes.string.isRequired
+  }).isRequired
 }

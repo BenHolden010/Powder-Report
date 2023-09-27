@@ -24,7 +24,18 @@ const DayCard = ({date, chanceofsnow, maxTempF, minTempF, hours}) => {
   DayCard.propTypes = {
     date: PropTypes.string.isRequired,
     chanceofsnow: PropTypes.string.isRequired, 
-    maxTempF: PropTypes.array.isRequired, 
-    minTempF: PropTypes.array.isRequired, 
-    hours: PropTypes.array.isRequired
+    maxTempF: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired, 
+    minTempF: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired,  
+    hours: PropTypes.arrayOf(
+      PropTypes.shape({
+      bottom: PropTypes.arrayOf(
+        PropTypes.shape({
+        weatherIconUrl: PropTypes.arrayOf(
+          PropTypes.shape({
+          value: PropTypes.string.isRequired
+        }))
+      })),
+      snowfall_cm: PropTypes.string.isRequired,
+      time: PropTypes.string.isRequired
+    })).isRequired
   }

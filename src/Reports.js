@@ -3,7 +3,6 @@ import ReportCard from "./ReportCard"
 import PropTypes from 'prop-types';
 
 function Reports({ reports, deleteReport }){
-
   const reportCards = reports.map(report => {
     return (
       <ReportCard
@@ -18,14 +17,23 @@ function Reports({ reports, deleteReport }){
   })
 
   return (
-    <div className='reports-container'>
+    <>
+    {!reportCards.length && <h2 className='card'>No reports! Please go Home to add a new Report!</h2>}
+    <div className='reports-container'> 
       {reportCards}
     </div>
+    </>
   )
 }
 export default Reports;
 
 Reports.propTypes = {
-  reports: PropTypes.array.isRequired,
+  reports: PropTypes.arrayOf(
+    PropTypes.shape({
+  currentSnowfall: PropTypes.string.isRequired,
+  id: PropTypes.number.isRequired,
+  location: PropTypes.string.isRequired,
+  maxSnow: PropTypes.number.isRequired
+  })).isRequired,
   deleteReport: PropTypes.func.isRequired
 }

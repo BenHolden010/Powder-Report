@@ -4,7 +4,7 @@ import DayCard from "./DayCard"
 import './Report.css'
 import PropTypes from 'prop-types';
 
-function Report({ allWeatherObjects, saveReport}){
+function Report({ allWeatherObjects, saveReport, savedNotification}){
 let location = useParams().location
 let allSnow = allWeatherObjects.map(obj=>obj.chanceofsnow)
 let reportTemplate = {
@@ -33,7 +33,8 @@ const days = allWeatherObjects.map(day=>{
     <div className='report-container'>
     {days}
     </div>
-    <button onClick={(event) => {saveReport(reportTemplate)}}>Save Report</button>
+    {savedNotification && <p>{savedNotification}</p>}
+    <button onClick={() => {saveReport(reportTemplate)}}>Save Report</button>
   </div>
 )
 }
@@ -41,6 +42,30 @@ const days = allWeatherObjects.map(day=>{
 export default Report;
 
 Report.propTypes = {
-  allWeatherObjects: PropTypes.array.isRequired,
-  saveReport: PropTypes.func.isRequired
+  allWeatherObjects: PropTypes.arrayOf(
+    PropTypes.shape({
+    bottom: PropTypes.arrayOf(
+      PropTypes.shape({
+        maxtempF: PropTypes.string.isRequired,
+        mintempF: PropTypes.string.isRequired
+    })).isRequired,
+    chanceofsnow: PropTypes.string.isRequired,
+    date: PropTypes.string.isRequired,
+    hourly: PropTypes.arrayOf(
+      PropTypes.shape({
+      bottom: PropTypes.arrayOf(
+        PropTypes.shape({
+        weatherIconUrl: PropTypes.arrayOf(
+          PropTypes.shape({
+          value: PropTypes.string.isRequired
+        }))
+      })),
+      snowfall_cm: PropTypes.string.isRequired,
+      time: PropTypes.string.isRequired
+    })).isRequired,
+    totalSnowfall_cm: PropTypes.string.isRequired
+
+  })).isRequired,
+  saveReport: PropTypes.func.isRequired,
+  savedNotification: PropTypes.string.isRequired
 }

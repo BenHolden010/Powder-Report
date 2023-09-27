@@ -16,6 +16,18 @@ describe('Powder Report', () => {
           }
         }
     }).as('report2')
+    .intercept('GET','https://api.worldweatheronline.com/premium/v1/ski.ashx?key=b5a5dbe0295146dfa83163732231809&q=sdfsdfsdf3&format=json',{
+      statusCode: 404,
+      body: {
+        message: 'Not Found'
+      }
+    }).as('report3')
+    .intercept('GET','https://api.worldweatheronline.com/premium/v1/ski.ashx?key=b5a5dbe0295146dfa83163732231809&q=sdfsdfsdf4&format=json',{
+      statusCode: 500,
+      body: {
+        message: 'Not Found'
+      }
+    }).as('report4')
     .visit('http://localhost:3000/')
   })
   it('should show home page with a header and form', () => {
@@ -60,5 +72,17 @@ describe('Powder Report', () => {
     .get('form').contains('button','SUBMIT').click().wait('@report2')
     .url().should('contain','/*')
     .get('.error').contains('p','Unable to find any matching weather location, please return home and try again.')
+})
+  it('should allow a user to see the error page with a 404 code', () => {
+    cy.get('input[name="location"]').type("sdfsdfsdf3").should('have.value','sdfsdfsdf3')
+    .get('form').contains('button','SUBMIT').click().wait('@report3')
+    .url().should('contain','/*')
+    .get('.error').contains('p','Error: please try again later')
+})
+  it('should allow a user to see the error page with a 500 code', () => {
+    cy.get('input[name="location"]').type("sdfsdfsdf4").should('have.value','sdfsdfsdf4')
+    .get('form').contains('button','SUBMIT').click().wait('@report4')
+    .url().should('contain','/*')
+    .get('.error').contains('p','Error: please try again later')
 })
 })
