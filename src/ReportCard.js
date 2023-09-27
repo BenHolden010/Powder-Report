@@ -1,13 +1,16 @@
+import { Link } from 'react-router-dom';
 import './ReportCard.css';
 import PropTypes from 'prop-types';
 
-const ReportCard = ({ location, currentSnowfall, maxSnow, id, deleteReport }) => {
+const ReportCard = ({ location, currentSnowfall, maxSnow, id, deleteReport, allWeatherObjects, setAllWeatherObjects }) => {
     return (
       <div className='card'>
+      <Link className="card-link" to={`/location/${location}`} onClick={()=>setAllWeatherObjects(allWeatherObjects)}>
         <h3>{location}</h3>
         <p>{currentSnowfall}</p>
         <p>Chance of new Snow: {maxSnow}%</p>
-        <button onClick={()=> deleteReport(id)}>🗑</button>
+      </Link>
+      <button className="delete-button" onClick={()=> deleteReport(id)}>🗑</button>
       </div>
     )
   }

@@ -2,7 +2,7 @@ import './Reports.css';
 import ReportCard from "./ReportCard"
 import PropTypes from 'prop-types';
 
-function Reports({ reports, deleteReport }){
+function Reports({ reports, deleteReport, setAllWeatherObjects}){
   const reportCards = reports.map(report => {
     return (
       <ReportCard
@@ -12,6 +12,8 @@ function Reports({ reports, deleteReport }){
         maxSnow={report.maxSnow}
         deleteReport={deleteReport}
         key={report.id}
+        allWeatherObjects = {report.allWeatherObjects}
+        setAllWeatherObjects={setAllWeatherObjects}
       />
     )
   })
