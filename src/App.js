@@ -68,7 +68,7 @@ function App(){
         <Route path='/*' element={<Error error={error} />}/>
         <Route path="/location/:location" element={<Report saveReport={saveReport}
           allWeatherObjects={allWeatherObjects} savedNotification={savedNotification}/>}/> 
-        <Route path="/savedReports" element={<Reports reports={reports} deleteReport={deleteReport}/>}/>
+        <Route path="/savedReports" element={<Reports reports={reports} deleteReport={deleteReport} setAllWeatherObjects={setAllWeatherObjects}/>}/>
       </Routes>
     </main>
   )
