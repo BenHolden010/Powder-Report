@@ -6,12 +6,14 @@ import './App.css';
 import { getReportByCity } from './apiCalls';
 import Error from './Error';
 import { Route, Routes, Link, useNavigate } from 'react-router-dom';
+import Loading from './Loading';
 
 function App(){
   const [reports, setReports] = useState([])
   const [allWeatherObjects, setAllWeatherObjects] = useState([])
   const [error, setError] = useState('Error: please try again later')
   const [savedNotification, setSavedNotification] = useState('')
+  const [loading, setLoading] = useState(false)
   const navigate = useNavigate()
 
   function displayReport(location){
@@ -21,11 +23,13 @@ function App(){
       navigate('/*')
       return 
     }
+    setLoading(true)
     getReportByCity(location)
     .then(data=>{
       if(data.data.error){
         setError('Unable to find any matching weather location, please return home and try again.')
         navigate('/*')
+        setLoading(false)
         return 
       } 
       else if(data.data.weather){
@@ -34,10 +38,12 @@ function App(){
         navigate('/*')
         setError('Error: please try again later')
       }
+      setLoading(false)
     })
     .catch(err=>{
       console.log(err)
       navigate('/*')
+      setLoading(false)
     })
     }
 
@@ -63,13 +69,14 @@ function App(){
       <h1>Powder Report</h1>
       <Link to='/savedReports'><button className='header-button'>Saved Reports</button></Link>
       </div>
+      {loading ? <Loading />:
       <Routes>
         <Route path="/" element={<Form displayReport={displayReport}/>}/>
         <Route path='/*' element={<Error error={error} />}/>
         <Route path="/location/:location" element={<Report saveReport={saveReport}
           allWeatherObjects={allWeatherObjects} savedNotification={savedNotification}/>}/> 
         <Route path="/savedReports" element={<Reports reports={reports} deleteReport={deleteReport} setAllWeatherObjects={setAllWeatherObjects}/>}/>
-      </Routes>
+      </Routes>}
     </main>
   )
 }
