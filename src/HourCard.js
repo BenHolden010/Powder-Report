@@ -2,7 +2,6 @@ import './HourCard.css'
 import PropTypes from 'prop-types';
 
 export default function HourCard({hour}){
-  // console.log('hour', hour)
   let stringTime
   if(hour.time === '0'){ stringTime = "12am" } 
   if(hour.time === '300'){ stringTime = "3am" } 
@@ -24,11 +23,13 @@ export default function HourCard({hour}){
 
 HourCard.propTypes = {
   hour: PropTypes.shape({
-      bottom: PropTypes.arrayOf({
-        weatherIconUrl: PropTypes.arrayOf({
+      bottom: PropTypes.arrayOf(
+        PropTypes.shape({
+        weatherIconUrl: PropTypes.arrayOf(
+          PropTypes.shape({
           value: PropTypes.string.isRequired
-        })
-      }),
+        }))
+      })),
       snowfall_cm: PropTypes.string.isRequired,
       time: PropTypes.string.isRequired
   }).isRequired

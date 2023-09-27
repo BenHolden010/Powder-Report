@@ -3,7 +3,6 @@ import ReportCard from "./ReportCard"
 import PropTypes from 'prop-types';
 
 function Reports({ reports, deleteReport }){
-console.log('reports', reports)
   const reportCards = reports.map(report => {
     return (
       <ReportCard
@@ -29,12 +28,12 @@ console.log('reports', reports)
 export default Reports;
 
 Reports.propTypes = {
-  reports: PropTypes.arrayOf({
+  reports: PropTypes.arrayOf(
+    PropTypes.shape({
   currentSnowfall: PropTypes.string.isRequired,
   id: PropTypes.number.isRequired,
   location: PropTypes.string.isRequired,
-  maxSnow: PropTypes.number.isRequired,
-  key: PropTypes.number.isRequired
-  }).isRequired,
+  maxSnow: PropTypes.number.isRequired
+  })).isRequired,
   deleteReport: PropTypes.func.isRequired
 }
